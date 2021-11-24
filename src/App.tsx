@@ -1,22 +1,46 @@
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import { ToDoAtom } from "./atoms";
-import Board from "./components/Board";
-import Card from "./components/Card";
+import Boards from "./components/Boards";
+
+const AppWrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+`
 
 function App() {
   const [toDos, setToDos] = useRecoilState(ToDoAtom);
 
-  const onDragEnd = () => {
-    console.log("drop")
+  const onDragEnd = (result:DropResult) => {
+    const {
+      destination,
+      source:{
+        index
+      }
+    } = result;
+
+    if(destination) {
+      setToDos(todos => {
+        const tmpToDos = [...todos];
+        tmpToDos.splice(index, 1);
+        tmpToDos.splice(destination?.index, 0, toDos[index]);
+        return tmpToDos;
+      })
+      console.log("drop")
+    }
   }
 
   return (
-    <div className="App">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Board toDos={toDos} title="firstSection" />
-      </DragDropContext>
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <AppWrapper>
+        <Boards toDos={toDos} title="firstSection" />
+      </AppWrapper>
+    </DragDropContext>
   );
 }
 
