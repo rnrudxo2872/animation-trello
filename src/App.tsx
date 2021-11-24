@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 
 function App() {
+  const onDragEnd = () => {
+    console.log("drop")
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId={"firstSection"}>
+          {(prov) => 
+          <ul ref={prov.innerRef} {...prov.droppableProps}>
+            <Draggable index={1} draggableId={"1"} >
+              {(provided) => 
+              <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                hello!
+              </li>
+              }
+            </Draggable>
+            <Draggable index={2} draggableId={"2"}>
+              {(provided) => 
+              <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                hello222!
+              </li>
+              }
+            </Draggable>
+            <Draggable index={3} draggableId={"3"}>
+              {(provided) => 
+              <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                hello333!
+              </li>
+              }
+            </Draggable>
+          </ul>
+          }
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
