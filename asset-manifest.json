@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/animation-trello/static/js/main.a5c4b204.chunk.js",
+    "main.js.map": "/animation-trello/static/js/main.a5c4b204.chunk.js.map",
+    "runtime-main.js": "/animation-trello/static/js/runtime-main.3c05b2da.js",
+    "runtime-main.js.map": "/animation-trello/static/js/runtime-main.3c05b2da.js.map",
+    "static/js/2.9da44858.chunk.js": "/animation-trello/static/js/2.9da44858.chunk.js",
+    "static/js/2.9da44858.chunk.js.map": "/animation-trello/static/js/2.9da44858.chunk.js.map",
+    "index.html": "/animation-trello/index.html",
+    "static/js/2.9da44858.chunk.js.LICENSE.txt": "/animation-trello/static/js/2.9da44858.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3c05b2da.js",
+    "static/js/2.9da44858.chunk.js",
+    "static/js/main.a5c4b204.chunk.js"
+  ]
+}
