@@ -6,4 +6,5 @@ export const Card = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
   box-shadow: 1px 1px 2px rgba(1, 1, 1, 0.3);
+  color: ${(props) => props.theme.textColor};
 `;
