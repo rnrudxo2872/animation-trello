@@ -5,7 +5,7 @@ import { Card } from "../styleds/Card.styled";
 
 function DragabbleCard({index, value}:ICard) {
     return(
-        <Draggable index={index} draggableId={value+index}>
+        <Draggable index={index} draggableId={value+Date.now()}>
             {(provided) => (
                 <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                     {value}

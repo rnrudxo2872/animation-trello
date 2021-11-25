@@ -11,19 +11,43 @@ function App() {
     const {
       destination,
       source:{
-        index
-      }
+        index,
+        droppableId
+      },
+      draggableId
     } = result;
 
-    if(destination) {
-      // setToDos(todos => {
-      //   const tmpToDos = [...todos];
-      //   tmpToDos.splice(index, 1);
-      //   tmpToDos.splice(destination?.index, 0, toDos[index]);
-      //   return tmpToDos;
-      // })
-      // console.log("drop")
+    if(!destination) return;
+
+    // If same board
+    if(destination.droppableId === droppableId){
+      setToDos(todos => {
+        const CopyToDo = [...todos[droppableId]];
+        
+        CopyToDo.splice(index, 1);
+        CopyToDo.splice(destination.index, 0, todos[droppableId][index]);
+      
+        return {
+          ...todos,
+          [droppableId]:CopyToDo
+        };
+      })
+      return;
     }
+
+    setToDos(todos => {
+      const OriginToDo = [...todos[droppableId]];
+      const TargetToDo = [...todos[destination.droppableId]];
+
+      OriginToDo.splice(index, 1);
+      TargetToDo.splice(destination.index, 0, todos[droppableId][index]);
+
+      return {
+        ...todos,
+        [droppableId]:OriginToDo,
+        [destination.droppableId]:TargetToDo
+      }
+    })
   }
 
   return (
