@@ -1,18 +1,9 @@
 import React from "react"
 import { Draggable } from "react-beautiful-dnd";
-import styled from "styled-components";
-
-interface ICard {
-    index: number;
-    value: string;
-}
-
-const Card = styled.div`
-    background-color: #e7dede;
-`
+import { ICard } from "../interfaces/Card.interface";
+import { Card } from "../styleds/Card.styled";
 
 function DragabbleCard({index, value}:ICard) {
-    console.log("index : ", index)
     return(
         <Draggable index={index} draggableId={value}>
             {(provided) => (

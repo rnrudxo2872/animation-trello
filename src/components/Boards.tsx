@@ -1,16 +1,7 @@
 import { Droppable } from "react-beautiful-dnd";
-import styled from "styled-components";
+import { IBoard } from "../interfaces/Board.interface";
+import { Board } from "../styleds/Boards.styled";
 import DragabbleCard from "./DragabbleCard";
-
-interface IBoard {
-    toDos:string[];
-    title:string;
-}
-
-const Board = styled.div`
-    min-height: 200px;
-    background-color: #9090da;
-`
 
 function Boards({toDos, title}:IBoard) {
     return (

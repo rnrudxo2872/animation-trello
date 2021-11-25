@@ -1,17 +1,8 @@
 import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { ToDoAtom } from "./atoms";
 import Boards from "./components/Boards";
-
-const AppWrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-`
+import { AppWrapper } from "./styleds/App.styled";
 
 function App() {
   const [toDos, setToDos] = useRecoilState(ToDoAtom);

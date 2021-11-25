@@ -209,7 +209,7 @@ textarea {
     padding: 0.2em 0;
 }
 body {
-    background-color: ${(props) => props.theme.bgColor};
+    background: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 } 
 `;
