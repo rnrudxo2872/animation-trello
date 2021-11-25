@@ -8,3 +8,9 @@ export const AppWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const Boards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+`;

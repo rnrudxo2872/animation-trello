@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Board = styled.div`
+export const BoardWrapper = styled.div`
   padding: 20px;
   min-height: 200px;
   min-width: 360px;
