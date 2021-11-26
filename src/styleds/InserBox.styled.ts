@@ -15,6 +15,7 @@ export const Insert = styled.input`
 `;
 
 export const ErrorMsg = styled.span`
+  font-weight: 700;
   margin-bottom: 12px;
   text-align: center;
   color: ${(props) => props.theme.textHighlight};

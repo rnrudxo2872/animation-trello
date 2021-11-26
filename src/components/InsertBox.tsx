@@ -1,25 +1,35 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { IInsertBox } from "../interfaces/InsertBox.interface";
+import { useSetRecoilState } from "recoil";
+import { ToDoAtom } from "../atoms";
+import { IFormState, IInsertBox } from "../interfaces/InsertBox.interface";
 import { ErrorMsg, Insert, InsertForm } from "../styleds/InserBox.styled";
+import { InsertToDoValidate } from "../validations/InsertBox.validation";
 
 function InsertBox({sectionName}:IInsertBox) {
-    const { register, handleSubmit, formState:{ errors } } = useForm();
-
-    const OnSubmit = (data:any) => {
-        console.log(data,'제출!')
+    const BASE_NAME = `${sectionName}_insert`;
+    
+    const { register, handleSubmit, formState:{ errors }, setValue } = useForm<IFormState>();
+    const setToDoList = useSetRecoilState(ToDoAtom)
+    
+    const OnSubmit = (data:IFormState) => {
+        
+        setToDoList((allToDoList) => {
+            const CopyList = [...allToDoList[sectionName]];
+            CopyList.push(data[BASE_NAME]);
+            
+            return {
+                ...allToDoList,
+                [sectionName] : CopyList
+            }
+        })
+        setValue(BASE_NAME, '');
     }
-    console.log(errors[`${sectionName}_insert`]);
+
     return (
         <InsertForm onSubmit={handleSubmit(OnSubmit)}>
-            <Insert placeholder="Insert content" {...register(`${sectionName}_insert`,
-            {
-                required: {
-                    value: true,
-                    message: "white space is not correct"
-                }
-            })} />
-            {errors[`${sectionName}_insert`] ? <ErrorMsg>{errors[`${sectionName}_insert`].message}!</ErrorMsg> : null}
+            <Insert placeholder="Insert content" {...register(BASE_NAME, InsertToDoValidate)} />
+            {errors[BASE_NAME] ? <ErrorMsg>{errors[BASE_NAME].message}!</ErrorMsg> : null}
         </InsertForm>
     )
 }
