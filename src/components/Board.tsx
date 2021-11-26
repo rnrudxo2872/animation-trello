@@ -2,6 +2,7 @@ import { Droppable } from "react-beautiful-dnd";
 import { IBoard } from "../interfaces/Board.interface";
 import { BoardTitle, BoardWrapper, DropArea } from "../styleds/Boards.styled";
 import DragabbleCard from "./DragabbleCard";
+import InsertBox from "./InsertBox";
 
 function Board({toDos, title}:IBoard) {
     return (
@@ -18,6 +19,7 @@ function Board({toDos, title}:IBoard) {
                 </DropArea>
                 }
             </Droppable>
+            <InsertBox sectionName={title} />
         </BoardWrapper>
     )
 }

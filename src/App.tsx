@@ -13,8 +13,7 @@ function App() {
       source:{
         index,
         droppableId
-      },
-      draggableId
+      }
     } = result;
 
     if(!destination) return;

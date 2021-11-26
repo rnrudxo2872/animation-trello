@@ -5,7 +5,8 @@ export const BoardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  min-height: 200px;
+  height: fit-content;
+  min-height: 160px;
   min-width: 360px;
   background-color: #9090da;
   border-radius: 12px;
