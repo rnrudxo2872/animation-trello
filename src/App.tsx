@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil";
 import { ToDoAtom } from "./atoms";
 import Board from "./components/Board";
+import { BoardStorageMapper } from "./data/browser-storage/BroswerMapper";
+import { BrowserStorage } from "./data/browser-storage/BrowserStorage";
+import { IBoard } from "./interfaces/Board.interface";
 import { AppWrapper, Boards } from "./styleds/App.styled";
 
 function App() {
@@ -48,6 +52,23 @@ function App() {
       }
     })
   }
+
+  useEffect(() => {
+    Object.keys(toDos).forEach((key) => {
+      const CurStorage = new BrowserStorage<IBoard>(key, new BoardStorageMapper());
+
+      if(CurStorage.isEmpty()) {
+        CurStorage.set({title:key, toDos:[]})
+      }
+
+      setToDos((init) => {
+        return {
+          ...init,
+          [key]: CurStorage.get().toDos
+        };
+      })
+    })
+  },[])
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
