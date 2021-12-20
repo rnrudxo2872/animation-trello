@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useEffect, useState } from "react";
+import { DragDropContext, DragStart } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import { ToDoAtom } from "./atoms";
 import Board from "./components/Board";
+import DeleteItem from "./components/DeleteItem";
 import { BoardStorageMapper } from "./data/browser-storage/BroswerMapper";
 import { BrowserStorage } from "./data/browser-storage/BrowserStorage";
 import { IBoard } from "./interfaces/Board.interface";
@@ -11,6 +12,7 @@ import { onDragEnd } from "./utils/App.util";
 
 function App() {
   const [toDos, setToDos] = useRecoilState(ToDoAtom);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     Object.keys(toDos).forEach((key) => {
@@ -33,8 +35,15 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function onDragStart(dragging: DragStart) {
+    console.log(dragging);
+  }
+
   return (
-    <DragDropContext onDragEnd={onDragEnd.bind(setToDos)}>
+    <DragDropContext
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd.bind(setToDos)}
+    >
       <AppWrapper>
         <Boards>
           {Object.keys(toDos).map((toDo) => (
@@ -42,6 +51,7 @@ function App() {
           ))}
         </Boards>
       </AppWrapper>
+      <DeleteItem />
     </DragDropContext>
   );
 }
