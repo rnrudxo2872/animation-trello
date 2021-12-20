@@ -11,7 +11,7 @@ function InsertBox({sectionName}:IInsertBox) {
     
     const { register, handleSubmit, formState:{ errors }, setValue } = useForm<IFormState>();
     const setToDoList = useSetRecoilState(ToDoAtom)
-    
+
     const OnSubmit = (data:IFormState) => {
         
         setToDoList((allToDoList) => {
