@@ -1,21 +1,19 @@
 import { DropResult } from "react-beautiful-dnd";
-import { SetterOrUpdater } from "recoil";
-import { IToDoState } from "../atoms";
+import { IOnDragEnd } from "../interfaces/App.interface";
 
-export function onDragEnd(
-  this: SetterOrUpdater<IToDoState>,
-  result: DropResult
-) {
+export function onDragEnd(this: IOnDragEnd, result: DropResult) {
   const {
     destination,
     source: { index, droppableId },
   } = result;
+  const { setToDos, setIsDragging } = this;
 
+  setIsDragging(false);
   if (!destination) return;
 
   // If same board
   if (destination.droppableId === droppableId) {
-    this((todos) => {
+    setToDos((todos) => {
       const CopyToDo = [...todos[droppableId]];
 
       CopyToDo.splice(index, 1);
@@ -29,7 +27,7 @@ export function onDragEnd(
     return;
   }
 
-  this((todos) => {
+  setToDos((todos) => {
     const OriginToDo = [...todos[droppableId]];
     const TargetToDo = [...todos[destination.droppableId]];
 

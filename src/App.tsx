@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { DragDropContext, DragStart } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
@@ -37,12 +38,16 @@ function App() {
 
   function onDragStart(dragging: DragStart) {
     console.log(dragging);
+    setIsDragging(true);
   }
 
   return (
     <DragDropContext
       onDragStart={onDragStart}
-      onDragEnd={onDragEnd.bind(setToDos)}
+      onDragEnd={onDragEnd.bind({
+        setToDos: setToDos,
+        setIsDragging: setIsDragging,
+      })}
     >
       <AppWrapper>
         <Boards>
@@ -51,7 +56,7 @@ function App() {
           ))}
         </Boards>
       </AppWrapper>
-      <DeleteItem />
+      <AnimatePresence>{isDragging ? <DeleteItem /> : null}</AnimatePresence>
     </DragDropContext>
   );
 }

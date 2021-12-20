@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const DeleteItemWrapper = styled.div`
+export const DeleteItemWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
