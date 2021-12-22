@@ -1,7 +1,8 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { DragDropContext, DragStart } from "react-beautiful-dnd";
+import { DragDropContext, DragStart, Droppable } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import { ToDoAtom } from "./atoms";
 import Board from "./components/Board";
 import DeleteItem from "./components/DeleteItem";
@@ -10,6 +11,16 @@ import { BrowserStorage } from "./data/browser-storage/BrowserStorage";
 import { IBoard } from "./interfaces/Board.interface";
 import { AppWrapper, Boards } from "./styleds/App.styled";
 import { onDragEnd } from "./utils/App.util";
+
+const Temp = styled.div`
+  position: fixed;
+  bottom: 35px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 35px;
+  height: 35px;
+`;
 
 function App() {
   const [toDos, setToDos] = useRecoilState(ToDoAtom);
@@ -56,7 +67,18 @@ function App() {
           ))}
         </Boards>
       </AppWrapper>
-      <AnimatePresence>{isDragging ? <DeleteItem /> : null}</AnimatePresence>
+
+      <Temp>
+        <Droppable droppableId="DeleteBox">
+          {(provided, snapshot) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <AnimatePresence>
+                {isDragging ? <DeleteItem /> : null}
+              </AnimatePresence>
+            </div>
+          )}
+        </Droppable>
+      </Temp>
     </DragDropContext>
   );
 }

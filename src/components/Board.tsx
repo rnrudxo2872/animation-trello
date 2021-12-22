@@ -7,34 +7,41 @@ import { BoardTitle, BoardWrapper, DropArea } from "../styleds/Boards.styled";
 import DragabbleCard from "./DragabbleCard";
 import InsertBox from "./InsertBox";
 
-function Board({toDos, title}:IBoard) {
-    const isInitialMount = useRef(true);
+function Board({ toDos, title }: IBoard) {
+  const isInitialMount = useRef(true);
 
-    useEffect(() => {
-        if(isInitialMount.current){
-            isInitialMount.current = false;
-        } else{
-            new BrowserStorage<IBoard>(title, new BoardStorageMapper()).set({title, toDos});
-        }
-    },[title, toDos])
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      new BrowserStorage<IBoard>(title, new BoardStorageMapper()).set({
+        title,
+        toDos,
+      });
+    }
+  }, [title, toDos]);
 
-    return (
-        <BoardWrapper>
-            <BoardTitle>{title}</BoardTitle>
-            <Droppable droppableId={title}>
-                {(provided, snapshot) => 
-                <DropArea isDraggingOver={snapshot.isDraggingOver} draggingFromThisWith={snapshot.draggingFromThisWith} ref={provided.innerRef} {...provided.droppableProps}>
-                    {toDos.map((value, index) => (
-                        <DragabbleCard key={index} index={index} value={value} />
-                    )
-                    )}
-                    {provided.placeholder}
-                </DropArea>
-                }
-            </Droppable>
-            <InsertBox sectionName={title} />
-        </BoardWrapper>
-    )
+  return (
+    <BoardWrapper>
+      <BoardTitle>{title}</BoardTitle>
+      <Droppable droppableId={title}>
+        {(provided, snapshot) => (
+          <DropArea
+            isDraggingOver={snapshot.isDraggingOver}
+            draggingFromThisWith={snapshot.draggingFromThisWith}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {toDos.map((value, index) => (
+              <DragabbleCard key={index} index={index} value={value} />
+            ))}
+            {provided.placeholder}
+          </DropArea>
+        )}
+      </Droppable>
+      <InsertBox sectionName={title} />
+    </BoardWrapper>
+  );
 }
 
 export default Board;

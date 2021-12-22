@@ -11,6 +11,7 @@ export function onDragEnd(this: IOnDragEnd, result: DropResult) {
   setIsDragging(false);
   if (!destination) return;
 
+  console.log(destination);
   // If same board
   if (destination.droppableId === droppableId) {
     setToDos((todos) => {
