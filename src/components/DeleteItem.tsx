@@ -1,5 +1,3 @@
-import { Droppable } from "react-beautiful-dnd";
-import { DropArea } from "../styleds/Boards.styled";
 import { DeleteItemWrapper } from "../styleds/DeleteItem.styled";
 import { DeleteItemWrapperVariant } from "../variants/DeleteItem.variants";
 

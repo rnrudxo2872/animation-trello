@@ -11,7 +11,6 @@ export function onDragEnd(this: IOnDragEnd, result: DropResult) {
   setIsDragging(false);
   if (!destination) return;
 
-  console.log(destination);
   // If same board
   if (destination.droppableId === droppableId) {
     setToDos((todos) => {
@@ -23,6 +22,20 @@ export function onDragEnd(this: IOnDragEnd, result: DropResult) {
       return {
         ...todos,
         [droppableId]: CopyToDo,
+      };
+    });
+    return;
+  }
+
+  if (destination.droppableId === "DeleteBox") {
+    setToDos((todos) => {
+      const OriginToDo = [...todos[droppableId]];
+
+      OriginToDo.splice(index, 1);
+
+      return {
+        ...todos,
+        [droppableId]: OriginToDo,
       };
     });
     return;

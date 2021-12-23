@@ -14,7 +14,7 @@ import { onDragEnd } from "./utils/App.util";
 
 const Temp = styled.div`
   position: fixed;
-  bottom: 35px;
+  bottom: 50px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -48,7 +48,6 @@ function App() {
   }, []);
 
   function onDragStart(dragging: DragStart) {
-    console.log(dragging);
     setIsDragging(true);
   }
 
@@ -75,6 +74,7 @@ function App() {
               <AnimatePresence>
                 {isDragging ? <DeleteItem /> : null}
               </AnimatePresence>
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
