@@ -19,3 +19,13 @@ export class BoardStorageMapper implements BroswerStorageMapper<IBoard> {
     };
   }
 }
+
+export class LocalStorageMapper<T> implements BroswerStorageMapper<T> {
+  toJson(data: T): string {
+    return JSON.stringify(data);
+  }
+
+  getFromJson(json: any): T {
+    return JSON.parse(json);
+  }
+}

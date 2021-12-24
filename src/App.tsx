@@ -6,7 +6,10 @@ import styled from "styled-components";
 import { ToDoAtom } from "./atoms";
 import Board from "./components/Board";
 import DeleteItem from "./components/DeleteItem";
-import { BoardStorageMapper } from "./data/browser-storage/BroswerMapper";
+import {
+  BoardStorageMapper,
+  LocalStorageMapper,
+} from "./data/browser-storage/BroswerMapper";
 import { BrowserStorage } from "./data/browser-storage/BrowserStorage";
 import { IBoard } from "./interfaces/Board.interface";
 import { AppWrapper, Boards } from "./styleds/App.styled";
@@ -27,30 +30,31 @@ function App() {
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    Object.keys(toDos).forEach((key) => {
-      const CurStorage = new BrowserStorage<IBoard>(
-        key,
+    const BoardsData = new BrowserStorage<string[]>(
+      "Boards",
+      new LocalStorageMapper<string[]>()
+    );
+
+    const InitList = BoardsData.get().reduce((prev, curKey) => {
+      const Storage = new BrowserStorage<IBoard>(
+        curKey,
         new BoardStorageMapper()
       );
 
-      if (CurStorage.isEmpty()) {
-        CurStorage.set({ title: key, toDos: [] });
-      }
+      return {
+        ...prev,
+        [curKey]: Storage.get().toDos,
+      };
+    }, {});
 
-      setToDos((init) => {
-        return {
-          ...init,
-          [key]: CurStorage.get().toDos,
-        };
-      });
-    });
+    setToDos(InitList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onDragStart(dragging: DragStart) {
     setIsDragging(true);
   }
-
+  console.log(toDos);
   return (
     <DragDropContext
       onDragStart={onDragStart}
