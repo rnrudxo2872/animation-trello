@@ -12,7 +12,7 @@ import { IBoard } from "./interfaces/Board.interface";
 import { AppWrapper, Boards } from "./styleds/App.styled";
 import { onDragEnd } from "./utils/App.util";
 
-const Temp = styled.div`
+const DeleteZone = styled.div`
   position: fixed;
   bottom: 50px;
   left: 0;
@@ -67,18 +67,20 @@ function App() {
         </Boards>
       </AppWrapper>
 
-      <Temp>
+      <DeleteZone>
         <Droppable droppableId="DeleteBox">
           {(provided, snapshot) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <AnimatePresence>
-                {isDragging ? <DeleteItem /> : null}
+                {isDragging ? (
+                  <DeleteItem isDraggingOver={snapshot.isDraggingOver} />
+                ) : null}
               </AnimatePresence>
               {provided.placeholder}
             </div>
           )}
         </Droppable>
-      </Temp>
+      </DeleteZone>
     </DragDropContext>
   );
 }

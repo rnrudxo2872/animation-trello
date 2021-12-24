@@ -1,9 +1,13 @@
+import { IDeleteState } from "../interfaces/DeleteItem.interface";
 import { DeleteItemWrapper } from "../styleds/DeleteItem.styled";
 import { DeleteItemWrapperVariant } from "../variants/DeleteItem.variants";
 
-function DeleteItem() {
+function DeleteItem(state: IDeleteState) {
+  const { isDraggingOver } = state;
+
   return (
     <DeleteItemWrapper
+      isDraggingOver={isDraggingOver}
       variants={DeleteItemWrapperVariant}
       initial="init"
       animate="after"
