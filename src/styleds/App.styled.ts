@@ -14,3 +14,13 @@ export const Boards = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 `;
+
+export const DeleteZone = styled.div`
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 35px;
+  height: 35px;
+`;

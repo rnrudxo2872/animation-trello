@@ -12,18 +12,8 @@ import {
 } from "./data/browser-storage/BroswerMapper";
 import { BrowserStorage } from "./data/browser-storage/BrowserStorage";
 import { IBoard } from "./interfaces/Board.interface";
-import { AppWrapper, Boards } from "./styleds/App.styled";
+import { AppWrapper, Boards, DeleteZone } from "./styleds/App.styled";
 import { onDragEnd } from "./utils/App.util";
-
-const DeleteZone = styled.div`
-  position: fixed;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 35px;
-  height: 35px;
-`;
 
 function App() {
   const [toDos, setToDos] = useRecoilState(ToDoAtom);
