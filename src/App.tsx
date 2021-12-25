@@ -2,7 +2,6 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { DragDropContext, DragStart, Droppable } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { ToDoAtom } from "./atoms";
 import Board from "./components/Board";
 import DeleteItem from "./components/DeleteItem";

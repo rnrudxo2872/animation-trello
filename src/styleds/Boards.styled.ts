@@ -8,6 +8,7 @@ export const BoardWrapper = styled.div`
   height: fit-content;
   min-height: 160px;
   min-width: 360px;
+  max-height: 90vh;
   background-color: #9090da;
   border-radius: 12px;
   box-shadow: 1px 1px 2px rgba(1, 1, 1, 0.3);
@@ -25,6 +26,8 @@ export const BoardTitle = styled.h2`
 export const DropArea = styled.div<IArea>`
   flex-grow: 1;
   padding: 30px;
+  max-height: 100%;
+  overflow-y: auto;
   background-color: ${(props) =>
     props.isDraggingOver
       ? "#AFAFE9"
