@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { DragDropContext, DragStart, Droppable } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import { ToDoAtom } from "./atoms";
+import AddList from "./components/AddList";
 import Board from "./components/Board";
 import DeleteItem from "./components/DeleteItem";
 import {
@@ -58,22 +59,22 @@ function App() {
             <Board key={toDo} title={toDo} toDos={toDos[toDo]}></Board>
           ))}
         </Boards>
+        <AddList></AddList>
+        <DeleteZone>
+          <Droppable droppableId="DeleteBox">
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <AnimatePresence>
+                  {isDragging ? (
+                    <DeleteItem isDraggingOver={snapshot.isDraggingOver} />
+                  ) : null}
+                </AnimatePresence>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DeleteZone>
       </AppWrapper>
-
-      <DeleteZone>
-        <Droppable droppableId="DeleteBox">
-          {(provided, snapshot) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              <AnimatePresence>
-                {isDragging ? (
-                  <DeleteItem isDraggingOver={snapshot.isDraggingOver} />
-                ) : null}
-              </AnimatePresence>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DeleteZone>
     </DragDropContext>
   );
 }

@@ -5,7 +5,7 @@ export const BoardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  height: fit-content;
+  height: 100%;
   min-height: 160px;
   min-width: 360px;
   max-height: 90vh;

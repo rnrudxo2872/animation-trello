@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AppWrapper = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin: 0 auto;
   justify-content: center;
@@ -11,6 +11,7 @@ export const AppWrapper = styled.div`
 
 export const Boards = styled.div`
   display: flex;
+  max-height: 100%;
   gap: 10px;
 `;
 

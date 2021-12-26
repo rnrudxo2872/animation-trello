@@ -208,6 +208,11 @@ textarea {
     color: #000;
     padding: 0.2em 0;
 }
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     background: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
