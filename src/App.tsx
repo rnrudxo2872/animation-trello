@@ -25,7 +25,7 @@ function App() {
       new LocalStorageMapper<string[]>()
     );
 
-    const InitList = BoardsData.get().reduce((prev, curKey) => {
+    const InitList = BoardsData.get()?.reduce((prev, curKey) => {
       const Storage = new BrowserStorage<IBoard>(
         curKey,
         new BoardStorageMapper()
@@ -38,13 +38,12 @@ function App() {
     }, {});
 
     setToDos(InitList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setToDos]);
 
   function onDragStart(dragging: DragStart) {
     setIsDragging(true);
   }
-  console.log(toDos);
+
   return (
     <DragDropContext
       onDragStart={onDragStart}
@@ -55,9 +54,10 @@ function App() {
     >
       <AppWrapper>
         <Boards>
-          {Object.keys(toDos).map((toDo) => (
-            <Board key={toDo} title={toDo} toDos={toDos[toDo]}></Board>
-          ))}
+          {toDos &&
+            Object.keys(toDos)?.map((toDo) => (
+              <Board key={toDo} title={toDo} toDos={toDos[toDo]}></Board>
+            ))}
         </Boards>
         <AddList></AddList>
         <DeleteZone>
